@@ -2,7 +2,7 @@
 Description: build single signatrue dataset, lable num: 0, <object-class> <x_center> <y_center> <width> <height>
 Author: Hejun Jiang
 Date: 2020-11-27 10:29:38
-LastEditTime: 2020-12-02 12:09:37
+LastEditTime: 2020-12-02 12:52:14
 LastEditors: Hejun Jiang
 Version: v0.0.1
 Contact: jianghejun@hccl.ioa.ac.cn
@@ -25,9 +25,9 @@ parser.add_argument('--sp-noise-ratio', type=list, default=[0.005, 0.02], help='
 parser.add_argument('--gauss-noise-ratio', type=list, default=[0.04, 0.07], help='the parameter of gauss noise')
 parser.add_argument('--signnum', type=list, default=[1, 10], help='the number scale of sign in background')
 parser.add_argument('--datasetdir', type=str, default='./dataset', help='the dir of dataset; background, signature must in here')
-parser.add_argument('--trainnum', type=int, default=2048, help='the number of train images for building')
-parser.add_argument('--valnum', type=int, default=512, help='the number of val images for building')
-parser.add_argument('--testnum', type=int, default=1024, help='the number of test images for building')
+parser.add_argument('--trainnum', type=int, default=4096, help='the number of train images for building')
+parser.add_argument('--valnum', type=int, default=1024, help='the number of val images for building')
+parser.add_argument('--testnum', type=int, default=2048, help='the number of test images for building')
 parser.add_argument('--projectname', type=str, default='sign', help='the name of project')
 conf = parser.parse_args()
 
@@ -204,7 +204,7 @@ def build(backList, signList, num, imgDir, lableDir, objlis):
         f.close()
         bimg = noiseRand(bimg)
         if conf.finetune:
-            cv2.imshow('bimg', bimg)
+            cv2.imshow('finetune', bimg)
             cv2.waitKey(0)
             exit(0)
         cv2.imwrite(os.path.join(imgDir, conf.projectname + "_" + str(i) + '.jpg'), bimg)
