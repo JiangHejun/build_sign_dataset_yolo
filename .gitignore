@@ -1,5 +1,7 @@
-*/images
-*/labels
-*/*.yaml
+*images
+*labels
+*fakes
+*.yaml
 .vscode
 build
+*__pycache__
