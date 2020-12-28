@@ -2,7 +2,7 @@
 Description: build single signatrue dataset, lable num: 0, <object-class> <x_center> <y_center> <width> <height>
 Author: Hejun Jiang
 Date: 2020-11-27 10:29:38
-LastEditTime: 2020-12-22 16:09:59
+LastEditTime: 2020-12-28 15:53:30
 LastEditors: Hejun Jiang
 Version: v0.0.1
 Contact: jianghejun@hccl.ioa.ac.cn
@@ -34,7 +34,7 @@ parser.add_argument('--projectname', type=str, default='sign', help='the name of
 parser.add_argument('--modelpath', type=str, default='./model/dcgan_generator_epoch2_times8000.0000.pth', help='the path of GAN model')
 parser.add_argument("--device", type=str, default='3', help="0 or 0,1,2,3 or cpu")
 parser.add_argument('--fakenum', type=int, default=1000, help='the number of generated fake images by GAN')
-parser.add_argument('--fake_ratio', type=float, default=0.2, help='the ratio number of fake images')
+parser.add_argument('--fake_ratio', type=float, default=0.2, help='the ratio number of fake images, 0.0 is not use GAN')
 
 conf = parser.parse_args()
 
@@ -211,7 +211,7 @@ def build(backList, signList, fakeList, num, imgDir, lableDir, objlis):
 
             box = getbox(bimg, rsimg, addedboxs)
             if len(box) == 0:
-                print('box is full', file)
+                print('     box is full', file)
                 continue  # 代表差不多满了，这次放弃覆盖
             addedboxs.append(box[2:])
 
